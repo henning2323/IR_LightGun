@@ -1,5 +1,5 @@
 # IR_LightGun
-<img src="/pictures/1csffls9rpl51.webp" width="500"/>
+<img src="/pictures/lightguns.webp" width="500"/>
 
 ## Introduction
 
@@ -24,12 +24,16 @@ A year later, I sat down and developed my own code with the following features:
 - Extreme viewing angles
 - Decreased input delay
 
+<img src="/pictures/topView.gif" width="400"/>
+<img src="/pictures/sightView.gif" width="400"/>
+
+
 ## Parts List:
 - **Arduino Pro Micro 5V/16Mhz (ca. 5€)**  
 	Arduino Leonardo would also work, but it's too large and more expensive
-- **IR Positioning Camera**  (20 - 25€)
+- **IR Positioning Camera (20 - 25€)**  
 	I got [this one](https://www.dfrobot.com/product-1088.html) from DFRobot, but I think I saw the same one on multiple Websites. It does all the heavy lifting (image processing) internally and directly provides the coordinates of up to 4 tracked IR sources via I2C. Also in my case it perfectly fits into the end of the broken nerf gun I used.
-- **A long USB cable**
+- **A long USB cable**  
 	The Camera needs to see the entire screen, so you have to keep a minimum distance to the screen. In the case of a 22" screen, it's around 2 meters. The distance scales linearly with monitor size, so take a cable length that fits to your screen. Also, better plan in some tolerance and make sure the cable is not meant for charging only.
 - **Some push buttons**  
 	Any form of a simple push button (button connects the terminals when pushed / if not pushed → no connection) will work here. They can later be mapped to mouse buttons and keyboard keys. In my nerf gun, I could use the already existing switches. I can use the trigger, the small second trigger, inserting a magazine and sliding back the lid on top.
@@ -46,12 +50,17 @@ A year later, I sat down and developed my own code with the following features:
 	These IR Sources need to be placed at the corners of your screen. I use the IR LEDs I salvaged from the Wii Sensor bars I used before, but anything would work. A nice brightness and a large viewing angle are desirable. Multiple LEDs close to each other will be picked up as one source by the sensor, which can be very helpful. In theory, even 4 candles with small flames placed at the screen's corners would work, but I don't think this is the most practical solution.
 	By the way, you can check if your IR LEDs are on and their brightness by looking at them with your phones' camera. You can try it by watching a remote control's LED flicker when you press a button.  
 	
+<img src="/pictures/IRfar.jpg" width="400"/>
+<img src="/pictures/IRclose.jpg" width="400"/>
+
 ## Wiring
 The Wiring is very simple. The IR Camera needs to be powered with 3.3V or 5V and its two communication lines need to be connected to the Microcontrollers I2C Pins. The yellow wire of the camera is the SDA line and connects to pin 2; the green wire  is the SCL line and connects to pin 3.
 All the buttons can be connected between any free digital pin and ground. If you chose to include and LED you can also connect it to a free pin. Depending on the bootloader you use (which board you choose in the Arduino IDE) to flash your software onto the Arduino memory, the pin numbers in the software may not correspond to the numbers printed on the board. If that's the case, just try which number addresses which pin until you found enough for all your buttons. This is not true for SDA and SCL! They are most defiantly where 2 and 3 are printed on your board.
 
 <img src="/pictures/wiring.svg"  width="500"/>
 This image shows how the camera needs to be connected (4 wires to the left) and an example of a pushbutton and a LED.
+
+<img src="/pictures/uC.jpg" width="400"/>
 
 ## Code
 In the Code, there are two parts where you need to edit something. First of all in line 8 to 13 you need to change the numbers to the ones where you connected a button or an LED.
@@ -75,7 +84,7 @@ or
 ```
 Keyboard.press(KEY_RETURN);
 ```
-
+You can of coures leave this part as it is, if you want to use the same buttons I use.
 
 After that, your code should be ready. In the Arduino IDE, you need to choose the COM-Port where your board is connected. For the board selection you can either try to find a 3rd party board library for the Pro Micro itself, or you just use the one provided for the Arduino Leonardo. They use the same chip.
 
