@@ -25,9 +25,9 @@ A year later I sat down and developed my own code with the following features:
 - decreasd input delay
 
 ## Parts List:
-- **Arduino Pro Micro**  
+- **Arduino Pro Micro 5V/16Mhz (ca. 5€)**  
 	Arduino Leonardo would also work, but its too large and more expensive
-- **IR Positioning Camera**  
+- **IR Positioning Camera**  (20 - 25€)
 	I got [this one](https://www.dfrobot.com/product-1088.html) from frome DFRobot, but I think I saw the same one on mutltiple Websites. It does all the heavy lifting (image processing) internally and directly provides the coordinates of up to 4 tracked IR sources via I2C. Also in my case it perfectly fitted into the end of the broken nerf gun I used.
 - **A long USB cable**
 	The Camera needs to see the entire screen, so you have to keep a minimum distance to the screen. In the case of a 22" screen, its around 2 meters. The distance scales linearly with monitor size so take a cablelength that fits to your screen. Also better plan in some tolerance.
@@ -38,6 +38,15 @@ A year later I sat down and developed my own code with the following features:
 	You also need a resistor if you want to make guarantee that the LED stays alive for longer than a second. For calculating its resistance value you need the forward voltage and the recomended/maximum forward current of your LED. It is either supplied by the manufacturer or you can find esitmates by color.
 	Also the Pro Micro comes in two versions with different voltages and operating speeds(3.3V/8MHz and 5V/16Mhz). I would recommend getting the 5V version since it faster and should result in less delay, but both should work. You calculate the resistance with this formula:  
 	```math
-	R = \frac{Operating Voltage - LED Forward Voltage}{forward current}
+	R = \frac{Operating Voltage - LED Forward Voltage}{ForwardCurrent}
 	```
 	If you dont want to calculate anything, just try some values between 100 Ohm and 1 kOhm and choose what brightness looks right for you.
+- **4 small IR Sources**  
+	These IR Sources need to be placed at the corners of your screen. I use the IR LEDs I salvaged from the Wii Sensor bars I used before, but anything would work. A nice brightness and a large viewing angle are desireable. Multiple LEDs close to each other will be picked up as one source by the sensor which can be very helpful. In theory even 4 candles with small flames placed at the screens corners would work, but I don't think this is the most practical solution.
+	By the way you can check if your IR LEDs are on and their brightness by looking at them with your phones camera. You can try it by watching a remote controls LED flicker when you press a button.  
+	
+## Wiring
+The Wiring is very simple. The IR Camera needs to be powered with 3.3V or 5V and its two communication lines need to be connected to the Microcontrollers I2C Pins. The yellow wire of the camera is the SDA line and connects to pin 2; the green wire  is the SCL line and connects to pin 3.
+All the buttons can be connected between any free digital pin and ground. If you chose to include an LED you can also connect it to a free pin. Depending on the bootloader you use (which board you choose in the Arduino IDE) to flash your software onto the arduinos memory the pin numbers in the software may not correspond to the numbers printed on the board. If thats the case, just try which number adresses wich pin until you found enough for all your buttons. This is not true for SDA and SCL! They are most defiently where 2 and 3 is printed on your board.
+
+<img src="/pictures/wiring.svg" width="500"/>
