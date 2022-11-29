@@ -39,4 +39,4 @@ A year later I sat down and developed my own code with the following features:
 	Also the Pro Micro comes in two versions with different voltages and operating speeds(3.3V/8MHz and 5V/16Mhz). I would recommend getting the 5V version since it faster and should result in less delay, but both should work. You calculate the resistance with this formula:  
 	$$ R = {\frac{Operating Voltage - LED Forward Voltage}{forward current}} $$  
 	If you dont want to calculate anything, just try some values between 100 Ohm and 1 kOhm and choose what brightness looks right for you.
-	
+	$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
