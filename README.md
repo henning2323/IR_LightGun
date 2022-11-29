@@ -37,6 +37,6 @@ A year later I sat down and developed my own code with the following features:
 	In one of the lightguns I included a bright white/blue LED under the panels in the front which flashes when the trigger is pulled. You don't notice it while playing but it looks cool for everyone watching.
 	You also need a resistor if you want to make guarantee that the LED stays alive for longer than a second. For calculating its resistance value you need the forward voltage and the recomended/maximum forward current of your LED. It is either supplied by the manufacturer or you can find esitmates by color.
 	Also the Pro Micro comes in two versions with different voltages and operating speeds(3.3V/8MHz and 5V/16Mhz). I would recommend getting the 5V version since it faster and should result in less delay, but both should work. You calculate the resistance with this formula:  
-	$ R = \frac{Operating Voltage - LED Forward Voltage}{recomended/maximum forward current)!}$  
+	$( R = \frac{Operating Voltage - LED Forward Voltage}{recomended/maximum forward current)!})$  
 	If you dont want to calculate anything, just try some values between 100 Ohm and 1 kOhm and choose what brightness looks right for you.
 	
